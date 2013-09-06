@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Intro to AngularJS</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/github.css">
+
+		<style>
+			.reveal .slides code { padding: 15px; }
+			.reveal .slides 	   { text-align: left; }
+
+			.reveal .slides ul   { list-style-type: square; }
+
+			#intro-slide-title {
+				text-align: left;
+				font-size: 104px;
+				margin-top: 50px;
+				margin-left: 50px;
+			}
+
+			#intro-slide-title span { font-size: 81%; border-bottom: 10px solid rgba(216, 48, 29, 0.8); }
+
+			#angular-logo {
+				float: right;
+				height: auto;
+				width: 30%;
+				margin-right: 10%;
+			}
+
+			h2.slide-title {
+				font-size: 58px;
+				line-height: 1.2em;
+				border-bottom: 10px solid rgba(216, 48, 29, 0.8);
+			}
+
+			h3.slide-title-h3 {
+				text-transform: none;
+				text-align: center;
+			}
+
+			.reveal blockquote {
+				width: auto;
+				font-weight: 300;
+				box-shadow: none;
+				quotes:'\201E' '\201C';
+				text-align: left;
+			}
+
+			.reveal .big-quote {
+				text-align: center;
+				font-weight: 100;
+				font-size: 60px;
+				line-height: 1.25em;
+			}
+
+			.reveal > .slides section {
+				font-weight: 300;
+			}
+
+			.reveal blockquote:before { content: open-quote; }
+			.reveal blockquote:after  { content: close-quote; }
+
+			.reveal code { background-color: white; line-height: 2em; }
+
+			.reveal pre {
+				width: 100%;
+				padding: 10px;
+				background-color: white;
+				font-size: 36px;
+				box-shadow: none;
+			}
+
+			.reveal .bl {
+		    width: 100%;
+		    text-align: center;
+		    padding: 30px 0;
+		    display: block;
+		    background-color: black;
+		    font-weight: bold;
+			}
+
+			.reveal .bl-controller { background-color: rgba(216, 48, 29, 0.8); }
+			.reveal .bl-scope { background-color: white; border-top: 4px solid black; border-bottom: 4px solid black; margin: 10px 0; }
+			.reveal .bl-view { background-color: rgba(216, 48, 29, 0.8); }
+
+		</style>
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+					<img src="img/angularjs.png" id="angular-logo">
+					<h1 id="intro-slide-title">Intro to<br> <span>AngularJS</span></h1>
+				</section>
+
+				<section>
+					<h2 class="slide-title">A bunch of inaccurate facts</h2>
+					<ul>
+						<li>Started as proprietary framework for building web apps, meant to be sold to enterprises</li>
+						<li>Main author, Miško Hevery was part of Google but the project was intended as start-up</li>
+						<li>Open sourced after a year or so of development</li>
+						<li>Picked up by some Google teams, most notably doubleclick</li>
+						<li>Received some official Google support</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3 class="slide-title-h3">What is AngularJs?</h2>
+					<blockquote class="fragment big-quote">
+						AngularJS is a toolset for building the framework most suited to your application development.
+					</blockquote>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Main tools</h2>
+					<ul>
+						<li class="fragment">Two-way data-binding</li>
+						<li class="fragment">MVC components</li>
+						<li class="fragment">DOM based templates</li>
+						<li class="fragment">Dependency Injection</li>
+						<li class="fragment">Directives, Services and Filters</li>
+						<li class="fragment">Testing tooling (mocks, Karma)	</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Bootstrapping</h2>
+<code class="fragment">
+&lt;div ng-app&gt;&lt;/div&gt;
+</code>
+<p class="fragment">But also, manually with <code>angular.bootstrap(...)</code></p>
+				</section>
+
+				<section>
+					<h2 class="slide-title">The Model</h2>
+					<p class="fragment"><code >{}</code>, a POJO.</p>
+					<ul>
+						<li class="fragment">no get</li>
+						<li class="fragment">no set</li>
+						<li class="fragment"><i>nada</i>, <span class="fragment">just data binding.</span></li>
+					</ul>
+
+<br>
+<code class="fragment">
+&lt;input type="text" ng-model="name"&gt;<br>
+{{ name }}
+</code>
+<br>
+<a class="fragment"href="http://stackoverflow.com/a/9693933/1025533">How does data-binding in angular work</a>
+				</section>
+
+				<section>
+				<code>
+ng-init
+ng-click
+ng-mouseenter
+ng-hide
+				</code>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Controller</h2>
+<pre class="fragment">
+function MainCtrl($scope) {
+  $scope.name = "Crocodile Dundee";
+}
+</pre>
+<code class="fragment">ng-controller="MainCtrl"</code>
+				</section>
+
+				<section>
+					<code class="fragment">$scope.items = ['apples', 'oranges', 'bananas']</code><br>
+<pre class="fragment">
+&ltul ng-repeat="item in items"&gt
+  &ltli&gt{{ item }}&lt/li&gt
+&lt/ul&gt
+</pre>
+				</section>
+
+				<section>
+					<div class="bl fragment bl-controller">Controller</div>
+					<div class="bl fragment bl-scope">$scope</div>
+					<div class="bl fragment bl-view">View</div>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Typical structure</h2>
+					<code class="fragment">var myApp = angular.module('myApp',[])</code>
+					<pre class="fragment">
+myApp.controller('MainCtrl',
+  function ($scope, $log) { ... })
+
+myApp.service('users',
+  function ($http, $location) { ... })
+
+myApp.directive('tabs',
+  function ($filter) { ... })
+
+					</pre>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Services</h2>
+					<blockquote>Angular services are singletons that carry out specific tasks common to web apps, such as the $http service that provides low level access to the browser's XMLHttpRequest object.</blockquote>
+					<p class="fragment">Many ways to create:</p>
+<pre class="fragment">
+return an instance ->
+myApp.service('tabs', function () ...)
+
+return an object ->
+myApp.factory('tabs', function () ...)
+
+configure when module is load ->
+myApp.provider('tabsProvider', function () ...)
+</pre>
+					<div class="fragment">
+						<a href="http://stackoverflow.com/questions/15666048/angular-js-service-vs-provider-vs-factory">Explanation</a>
+						<a href="http://jsfiddle.net/pkozlowski_opensource/PxdSP/14/">Examples</a>
+					</div>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Several modules</h2>
+<pre>
+var modal = angular.module('modal', []);
+modal.controller('MainCtrl',
+  function () { ... });
+
+var monolithicSPA = angular.module('SPA2012', ['redisclient', 'modal', 'phase4buttons']);
+</pre>
+				</section>
+
+				<section>
+					<h2 class="slide-title">Minifaction</h2>
+					<p class="fragment">...is a pain, due to DI.</p>
+<pre class="fragment">
+// inferred (only works in unminified code)
+$injector.invoke(function(serviceA){});
+
+// annotated
+function explicit(databaseService) {};
+explicit.$inject = ['databaseService'];
+$injector.invoke(explicit);
+
+// inline (used in ngSchedule)
+$injector.invoke(['databaseService', function(databaseService){}]);
+</pre>
+				</section>
+
+				<section>
+					<h2>Resources</h2>
+					<ul>
+						<li>Best screencast: <a href="http://tekpub.com/products/angular">Tekpub: Show Me AngularJS</a></li>
+						<li>Tons of articles: <a href="https://github.com/jmcunningham/AngularJS-Learning">github.com/jmcunningham/AngularJS-Learning</a></li>
+						<li>Newsletter: <a href="http://www.ng-newsletter.com/">ng-newsletter</a></li>
+					</ul>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: false,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
